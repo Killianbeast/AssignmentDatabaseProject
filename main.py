@@ -7,7 +7,7 @@ print("Database opened successfully")
 
 # Create a new entry into the database
 # TODO: Error handling
-def createNewEntry():
+def create_new_entry():
     assignment = input("Enter assignment name: ")
     classcode = input("Enter class code: ")
     duedate = input("Enter the due date: ")
@@ -20,7 +20,7 @@ def createNewEntry():
 
 # Deletes an entry from the database
 # TODO: Error handling
-def deleteEntry():
+def delete_entry():
     delSel = input("Enter the ID of the row: ")
     cur.execute("DELETE FROM assignments WHERE ID = (?)", (delSel,))
     conn.commit()
@@ -29,7 +29,7 @@ def deleteEntry():
 
 # Show all of the database entries to the user
 # TODO: Error handling
-def showAllEntries():
+def show_all_entries():
     print("\n")
     cur.execute("SELECT * FROM assignments ORDER BY due_date")
     allrows = cur.fetchall()
@@ -43,7 +43,7 @@ def showAllEntries():
 # Mark an entry as complete, updating the "Completed?" field to TRUE
 # TODO: Implement a way to undo the completion
 # TODO: Error handling
-def markEntryComplete():
+def mark_entry_complete():
     comSel = input("Enter ID of complete assignment: ")
     cur.execute("UPDATE assignments SET completion = 'TRUE' WHERE ID = (?)", comSel)
     conn.commit()
@@ -65,16 +65,16 @@ def main():
 
     while selection != 0:
         if selection == 1:
-            createNewEntry()
+            create_new_entry()
             pass
         elif selection == 2:
-            deleteEntry()
+            delete_entry()
             pass
         elif selection == 3:
-            showAllEntries()
+            show_all_entries()
             pass
         elif selection == 4:
-            markEntryComplete()
+            mark_entry_complete()
             pass
         else:
             print("Error")
