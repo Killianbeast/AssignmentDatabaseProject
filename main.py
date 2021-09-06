@@ -4,6 +4,15 @@ conn = sqlite3.connect("Schedule.db")
 cur = conn.cursor()
 print("Database opened successfully")
 
+# TODO: Find a way to potentially add classes to this project
+#class Entry:
+#    def __init__(self, assignment, classcode, duedate, note):
+#        self.assignment = assignment
+#        self.classcode = classcode
+#        self.duedate = duedate
+#        self.note = note
+
+
 
 # Create a new entry into the database
 # TODO: Error handling
@@ -22,7 +31,7 @@ def create_new_entry():
 # TODO: Error handling
 def delete_entry():
     delSel = input("Enter the ID of the row: ")
-    cur.execute("DELETE FROM assignments WHERE ID = (?)", (delSel,))
+    cur.execute("DELETE FROM assignments WHERE ID = (?)", [delSel])
     conn.commit()
     print("Entry deleted\n")
 
@@ -45,7 +54,7 @@ def show_all_entries():
 # TODO: Error handling
 def mark_entry_complete():
     comSel = input("Enter ID of complete assignment: ")
-    cur.execute("UPDATE assignments SET completion = 'TRUE' WHERE ID = (?)", comSel)
+    cur.execute("UPDATE assignments SET completion = 'TRUE' WHERE ID = (?)", [comSel])
     conn.commit()
     print("Entry marked as complete\n")
 
@@ -77,7 +86,7 @@ def main():
             mark_entry_complete()
             pass
         else:
-            print("Error")
+            print("Error, invalid selection")
 
         menu()
         selection = int(input("Enter your selection: "))
